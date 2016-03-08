@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "build": "electron-packager . '245cloud' --platform=darwin --arch=x64 --version=0.36.10 --icon=images/icon.icns --prune --overwrite"
+    "build": "electron-packager . '245cloud' --platform=darwin --arch=x64 --version=0.36.0 --icon=images/icon.icns --prune --overwrite"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "gulp-plumber": "^1.0.1"
   },
   "dependencies": {
+    "d3": "^3.5.16",
     "electron-packager": "^5.1.1",
     "electron-prebuilt": "^0.36.0",
     "jquery": "^2.2.1",
