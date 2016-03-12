@@ -12,7 +12,7 @@ var path = require('path')
 
 const request = require('request');
 const mb = menubar({ icon: ACTIVE_MENUBAR_ICON  });
-//mb.setOption('preload', path.resolve(path.join(__dirname, 'preload.js')))
+mb.setOption('preload', path.resolve(path.join(__dirname, 'preload.js')))
 
 const switchIconUnread = ()=> {
   mb.tray.setImage(ACTIVE_MENUBAR_ICON )
