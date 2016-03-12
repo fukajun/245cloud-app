@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-require('electron-cookies')
+import { _cookies } from 'electron-cookies';
 
 // NOTE: 通常のjQueryが正しく読み込めないためアプリ内のjqueryを使用している
 window.$ = window.jQuery = require('jquery');

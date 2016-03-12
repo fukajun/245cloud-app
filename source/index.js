@@ -2,5 +2,6 @@
 // Renderer
 
 document.addEventListener("DOMContentLoaded", ()=> {
-  //location.href = 'http://245cloud.com/'
+  console.log('init')
+  // Nothing to do
 })

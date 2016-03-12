@@ -8,11 +8,10 @@ const NOTIFY_ICON           = __dirname + '/images/notify_icon.png'
 import menubar from 'menubar';
 import { app, ipcMain } from 'electron';
 import notifier from 'node-notifier';
-var path = require('path')
+import path = from 'path'
 
 const request = require('request');
 const mb = menubar({ icon: ACTIVE_MENUBAR_ICON  });
-mb.setOption('preload', path.resolve(path.join(__dirname, 'preload.js')))
 
 const switchIconUnread = ()=> {
   mb.tray.setImage(ACTIVE_MENUBAR_ICON )
@@ -23,9 +22,8 @@ const switchIconRead = ()=> {
 const setTrayTitle = (title)=> {
   mb.tray.setTitle(title)
 }
-mb.on('after-create-window', function ready () {
-  //mb.window.loadURL('http://246cloud.com/')
-})
+
+mb.setOption('preload', path.resolve(path.join(__dirname, 'preload.js')))
 
 mb.on('ready', function ready () {
 
