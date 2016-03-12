@@ -1,4 +1,5 @@
 import { ipcRenderer } from 'electron';
+require('electron-cookies')
 
 // NOTE: 通常のjQueryが正しく読み込めないためアプリ内のjqueryを使用している
 window.$ = window.jQuery = require('jquery');
@@ -10,19 +11,27 @@ window.CalHeatMap = function() {
 
 $(()=> {
   var getCountdown = function() {
-    return $('.countdown2').text().trim();
+    var webview = document.getElementById('webview');
+    var countdown =  webview.getTitle();
+    if(!countdown.match(/\d\d:\d\d/)) {
+      return ''
+    }
+    return countdown
   }
 
   setInterval(() => {
     let countdown= getCountdown()
-    if(!countdown.length) { return }
-
+    if(!countdown.length) {
+      return
+    }
     ipcRenderer.send('set_title', countdown)
   }, 100)
 
   setInterval(() => {
     let countdown= getCountdown()
-    if(!countdown.length) { return }
+    if(!countdown.length) { 
+      return
+    }
 
     switch(countdown) {
       case '23:55':

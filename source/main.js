@@ -2,26 +2,29 @@
 // MainProcess
 'use strict';
 
+const ACTIVE_MENUBAR_ICON   = __dirname + '/images/active.png'
+const INACTIVE_MENUBAR_ICON = __dirname + '/images/inactive.png'
+const NOTIFY_ICON           = __dirname + '/images/notify_icon.png'
 import menubar from 'menubar';
 import { app, ipcMain } from 'electron';
 import notifier from 'node-notifier';
 var path = require('path')
 
 const request = require('request');
-const mb = menubar({ icon: __dirname + '/images/read.png' });
-mb.setOption('preload', path.resolve(path.join(__dirname, 'preload.js')))
+const mb = menubar({ icon: ACTIVE_MENUBAR_ICON  });
+//mb.setOption('preload', path.resolve(path.join(__dirname, 'preload.js')))
 
 const switchIconUnread = ()=> {
-  mb.tray.setImage(__dirname + '/images/unread.png')
+  mb.tray.setImage(ACTIVE_MENUBAR_ICON )
 }
 const switchIconRead = ()=> {
-  mb.tray.setImage(__dirname + '/images/read.png')
+  mb.tray.setImage(ACTIVE_MENUBAR_ICON )
 }
 const setTrayTitle = (title)=> {
   mb.tray.setTitle(title)
 }
 mb.on('after-create-window', function ready () {
-  mb.window.loadURL('http://245cloud.com/')
+  //mb.window.loadURL('http://246cloud.com/')
 })
 
 mb.on('ready', function ready () {
@@ -32,7 +35,7 @@ mb.on('ready', function ready () {
   ipcMain.on('notify', (event, title, message)=> {
     notifier.notify({
       title: title,
-      icon: __dirname + '/images/notify_icon.png',
+      icon: NOTIFY_ICON,
       message: message
     })
   });
