@@ -37,6 +37,15 @@ $(()=> {
       case '23:55':
         ipcRenderer.send('notify', '245cloud' , 'Pomo START!!!')
         break
+      case '20:00':
+        ipcRenderer.send('notify', '245cloud' , 'あと20分')
+        break
+      case '10:00':
+        ipcRenderer.send('notify', '245cloud' , 'あと10分')
+        break
+      case '05:00':
+        ipcRenderer.send('notify', '245cloud' , 'あと5分')
+        break
       case '00:00':
         ipcRenderer.send('notify', '245cloud' , 'お疲れ様でした')
         break
