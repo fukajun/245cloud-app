@@ -8,7 +8,7 @@ const NOTIFY_ICON           = __dirname + '/images/notify_icon.png'
 import menubar from 'menubar';
 import { app, ipcMain } from 'electron';
 import notifier from 'node-notifier';
-import path = from 'path'
+import path from 'path'
 
 const request = require('request');
 const mb = menubar({ icon: ACTIVE_MENUBAR_ICON  });
