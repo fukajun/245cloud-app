@@ -1,4 +1,4 @@
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 
 // NOTE: webviewを使用している時にcookiesを使用するとcookieが有効でないという問題が発生する
 //import { _cookies } from 'electron-cookies';
@@ -10,6 +10,12 @@ import { ipcRenderer } from 'electron';
 //}
 
 document.addEventListener("DOMContentLoaded", ()=> {
+
+  $(document).on('click', 'a[href^="http"]', function(e) {
+    event.preventDefault();
+    shell.openExternal(this.href);
+  })
+
   var getCountdown = function() {
     var countdown = document.title;
     if(!countdown.match(/\d\d:\d\d/)) {
