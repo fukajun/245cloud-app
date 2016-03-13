@@ -23,7 +23,6 @@ const setTrayTitle = (title)=> {
   mb.tray.setTitle(title)
 }
 
-mb.setOption('preload', path.resolve(path.join(__dirname, 'preload.js')))
 
 mb.on('ready', function ready () {
 
