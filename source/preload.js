@@ -1,18 +1,17 @@
 import { ipcRenderer } from 'electron';
-import { _cookies } from 'electron-cookies';
 
+// NOTE: webviewを使用している時にcookiesを使用するとcookieが有効でないという問題が発生する
+//import { _cookies } from 'electron-cookies';
 // NOTE: 通常のjQueryが正しく読み込めないためアプリ内のjqueryを使用している
-window.$ = window.jQuery = require('jquery');
+//     : <webview>を使用するようになったため次のjquery, calheadMapは不要になった
+//window.$ = window.jQuery = require('jquery');
+//window.CalHeatMap = function() {
+//  return { init : function() { } }
+//}
 
-// FIXME: CalHeatMap()が存在しないエラーへの対応するためのMock
-window.CalHeatMap = function() {
-  return { init : function() { } }
-}
-
-$(()=> {
+document.addEventListener("DOMContentLoaded", ()=> {
   var getCountdown = function() {
-    var webview = document.getElementById('webview');
-    var countdown =  webview.getTitle();
+    var countdown = document.title;
     if(!countdown.match(/\d\d:\d\d/)) {
       return ''
     }
