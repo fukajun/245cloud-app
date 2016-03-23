@@ -47,17 +47,15 @@ const initMenu = ()=> {
 }
 
 mb.on('ready', function ready () {
-  var flg = false;
-  var ret = globalShortcut.register('ctrl+shift+p', function() {
-    flg = true;
-  });
-  ipcMain.on('fetch_request', function(event, arg) {
+  var startFlg = false;
+  globalShortcut.register('ctrl+shift+p', ()=> {
+    startFlg = true;
   });
 
   ipcMain.on('start', function(event, arg) {
-    if (flg) {
+    if (startFlg) {
       event.sender.send('reply-start')
-      flg = false;
+      startFlg = false;
     }
   });
   ipcMain.on('notify', (event, title, message)=> {
