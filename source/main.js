@@ -13,6 +13,7 @@ import path from 'path'
 
 const request = require('request');
 const mb = menubar({ icon: ACTIVE_MENUBAR_ICON  });
+const mb.setOption('width', 500)
 
 const switchIconUnread = ()=> {
   mb.tray.setImage(ACTIVE_MENUBAR_ICON )
@@ -45,6 +46,7 @@ const initMenu = ()=> {
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
+
 
 mb.on('ready', function ready () {
   var startFlg = false;
