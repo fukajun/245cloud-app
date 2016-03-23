@@ -24,7 +24,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
     return countdown
   }
 
+  ipcRenderer.on('reply-start', ()=> {
+    $('.btn:eq(1)').click()
+  })
   setInterval(() => {
+    ipcRenderer.send('start')
     let countdown= getCountdown()
     if(!countdown.length) {
       return

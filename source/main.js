@@ -6,7 +6,7 @@ const ACTIVE_MENUBAR_ICON   = __dirname + '/images/active.png'
 const INACTIVE_MENUBAR_ICON = __dirname + '/images/inactive.png'
 const NOTIFY_ICON           = __dirname + '/images/notify_icon.png'
 import menubar from 'menubar';
-import { app, ipcMain } from 'electron';
+import { app, ipcMain, globalShortcut } from 'electron';
 import Menu from 'menu';
 import notifier from 'node-notifier';
 import path from 'path'
@@ -47,10 +47,19 @@ const initMenu = ()=> {
 }
 
 mb.on('ready', function ready () {
-
+  var flg = false;
+  var ret = globalShortcut.register('ctrl+shift+p', function() {
+    flg = true;
+  });
   ipcMain.on('fetch_request', function(event, arg) {
   });
 
+  ipcMain.on('start', function(event, arg) {
+    if (flg) {
+      event.sender.send('reply-start')
+      flg = false;
+    }
+  });
   ipcMain.on('notify', (event, title, message)=> {
     notifier.notify({
       title: title,
