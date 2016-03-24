@@ -13,7 +13,7 @@ import path from 'path'
 
 const request = require('request');
 const mb = menubar({ icon: ACTIVE_MENUBAR_ICON  });
-const mb.setOption('width', 500)
+mb.setOption('width', 500)
 
 const switchIconUnread = ()=> {
   mb.tray.setImage(ACTIVE_MENUBAR_ICON )
@@ -60,6 +60,7 @@ mb.on('ready', function ready () {
       startFlg = false;
     }
   });
+
   ipcMain.on('notify', (event, title, message)=> {
     notifier.notify({
       title: title,
@@ -67,9 +68,11 @@ mb.on('ready', function ready () {
       message: message
     })
   });
+
   ipcMain.on('set_title', (event, text)=> {
     setTrayTitle(text.trim())
   });
+
   ipcMain.on('mark_unread', (event, arg)=> {
     switchIconUnread();
   });
