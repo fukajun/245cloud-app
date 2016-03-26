@@ -47,26 +47,32 @@ const initMenu = ()=> {
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
+
 mb.on('ready', function ready () {
-  var startFlg = false;
-  globalShortcut.register('ctrl+shift+p', ()=> {
-    startFlg = true;
-  });
-  globalShortcut.register('ctrl+shift+m', ()=> {
-    if(mb.window.isVisible()) {
-      mb.hideWindow();
-    } else {
-      mb.showWindow();
-    }
+
+  ipcMain.on('renderer_init', function(event, arg) {
+
+    var sender = event.sender
+
+    //
+    // Toggle window show and hide
+    globalShortcut.register('ctrl+shift+p', ()=> {
+      if(mb.window.isVisible()) {
+        mb.hideWindow();
+      } else {
+        mb.showWindow();
+      }
+    });
+
+    //
+    // Start pomodoro recently track
+    globalShortcut.register('ctrl+shift+m', ()=> {
+      sender.send('pomo_start')
+    });
   });
 
-  ipcMain.on('start', function(event, arg) {
-    if (startFlg) {
-      event.sender.send('reply-start')
-      startFlg = false;
-    }
-  });
-
+  //
+  // Setting ipc event
   ipcMain.on('notify', (event, title, message)=> {
     notifier.notify({
       title: title,

@@ -24,11 +24,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
     return countdown
   }
 
-  ipcRenderer.on('reply-start', ()=> {
+  ipcRenderer.on('pomo_start', ()=> {
     $('.btn:eq(1)').click()
   })
+
   setInterval(() => {
-    ipcRenderer.send('start')
+    //ipcRenderer.send('start')
     let countdown= getCountdown()
     if(!countdown.length) {
       return
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
   setInterval(() => {
     let countdown= getCountdown()
-    if(!countdown.length) { 
+    if(!countdown.length) {
       return
     }
 
@@ -60,4 +61,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         break
     }
   }, 800)
+
+  // Send Init
+  ipcRenderer.send('renderer_init')
 })
