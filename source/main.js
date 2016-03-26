@@ -46,8 +46,6 @@ const initMenu = ()=> {
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
-
-
 mb.on('ready', function ready () {
 
   ipcMain.on('renderer_init', function(event, arg) {
@@ -60,7 +58,11 @@ mb.on('ready', function ready () {
       if(mb.window.isVisible()) {
         mb.hideWindow();
       } else {
-        mb.showWindow();
+        if(!trayBounds){
+          mb.showWindow();
+        } else {
+          mb.showWindow(trayBounds);
+        }
       }
     });
 
@@ -80,31 +82,31 @@ mb.on('ready', function ready () {
       message: message
     })
   });
-
   ipcMain.on('set_title', (event, text)=> {
     setTrayTitle(text.trim())
   });
-
   ipcMain.on('mark_unread', (event, arg)=> {
     switchIconUnread();
   });
-
   ipcMain.on('quit', (event, arg)=> {
     app.quit();
   });
-
   notifier.on('click', (event, arg)=> {
     mb.showWindow();
   });
-
   mb.on('show', ()=> {
     setTimeout(()=> {
       switchIconRead();
     }, 1000);
   })
-
   mb.on('hide', ()=> {
     switchIconRead();
+  })
+  // FIXME: 今のところtray iconの位置を取る方法がclickイベントしかない
+  //       のでここでtrayBoundsを取得している
+  var trayBounds = null;
+  mb.tray.on('click', (_, bounds)=> {
+    trayBounds = bounds
   })
 
   mb.showWindow();
