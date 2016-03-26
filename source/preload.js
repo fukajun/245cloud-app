@@ -24,16 +24,25 @@ document.addEventListener("DOMContentLoaded", ()=> {
     return countdown
   }
 
+  let doingFlag = false;
   ipcRenderer.on('pomo_start', ()=> {
+    if(doingFlag) {
+      return
+    }
+
     $('.btn:eq(1)').click()
   })
 
   setInterval(() => {
-    //ipcRenderer.send('start')
     let countdown= getCountdown()
+
     if(!countdown.length) {
-      return
+      countdown = '--:--'
+      doingFlag = false
+    } else {
+      doingFlag = true
     }
+
     ipcRenderer.send('set_title', countdown)
   }, 100)
 
