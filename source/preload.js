@@ -24,17 +24,31 @@ document.addEventListener("DOMContentLoaded", ()=> {
     return countdown
   }
 
-  setInterval(() => {
-    let countdown= getCountdown()
-    if(!countdown.length) {
+  let doingFlag = false;
+  ipcRenderer.on('pomo_start', ()=> {
+    if(doingFlag) {
       return
     }
+
+    $('.btn:eq(1)').click()
+  })
+
+  setInterval(() => {
+    let countdown= getCountdown()
+
+    if(!countdown.length) {
+      countdown = '--:--'
+      doingFlag = false
+    } else {
+      doingFlag = true
+    }
+
     ipcRenderer.send('set_title', countdown)
   }, 100)
 
   setInterval(() => {
     let countdown= getCountdown()
-    if(!countdown.length) { 
+    if(!countdown.length) {
       return
     }
 
@@ -56,4 +70,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         break
     }
   }, 800)
+
+  // Send Init
+  ipcRenderer.send('renderer_init')
 })
