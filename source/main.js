@@ -53,6 +53,13 @@ mb.on('ready', function ready () {
   globalShortcut.register('ctrl+shift+p', ()=> {
     startFlg = true;
   });
+  globalShortcut.register('ctrl+shift+m', ()=> {
+    if(mb.window.isVisible()) {
+      mb.hideWindow();
+    } else {
+      mb.showWindow();
+    }
+  });
 
   ipcMain.on('start', function(event, arg) {
     if (startFlg) {
