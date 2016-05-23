@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
         break
       case '00:00':
         ipcRenderer.send('notify', '245cloud' , 'お疲れ様でした')
+        ipcRenderer.send('show_window')
         break
     }
   }, 800)

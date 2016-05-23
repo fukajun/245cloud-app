@@ -82,6 +82,9 @@ mb.on('ready', function ready () {
       message: message
     })
   });
+  ipcMain.on('show_window', (event, arg)=> {
+    mb.showWindow();
+  });
   ipcMain.on('set_title', (event, text)=> {
     setTrayTitle(text.trim())
   });
