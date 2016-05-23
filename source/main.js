@@ -46,23 +46,31 @@ const initMenu = ()=> {
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
+
 mb.on('ready', function ready () {
 
   ipcMain.on('renderer_init', function(event, arg) {
 
     var sender = event.sender
 
+    var closeWindow = ()=> {
+        mb.hideWindow();
+    }
+    var openWindow = ()=> {
+      if(!trayBounds){
+        mb.showWindow();
+      } else {
+        mb.showWindow(trayBounds);
+      }
+    }
+
     //
     // Toggle window show and hide
     globalShortcut.register('ctrl+shift+p', ()=> {
       if(mb.window.isVisible()) {
-        mb.hideWindow();
+        closeWindow();
       } else {
-        if(!trayBounds){
-          mb.showWindow();
-        } else {
-          mb.showWindow(trayBounds);
-        }
+        openWindow();
       }
     });
 
@@ -83,7 +91,7 @@ mb.on('ready', function ready () {
     })
   });
   ipcMain.on('show_window', (event, arg)=> {
-    mb.showWindow();
+    openWindow();
   });
   ipcMain.on('set_title', (event, text)=> {
     setTrayTitle(text.trim())
