@@ -102,6 +102,10 @@ mb.on('ready', function ready () {
   ipcMain.on('quit', (event, arg)=> {
     app.quit();
   });
+  ipcMain.on('reload', (event, arg)=> {
+    let browserWindow = event.sender;
+    browserWindow.reload()
+  });
   notifier.on('click', (event, arg)=> {
     mb.showWindow();
   });
