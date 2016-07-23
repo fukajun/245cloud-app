@@ -49,20 +49,20 @@ const initMenu = ()=> {
 
 mb.on('ready', function ready () {
 
+  var closeWindow = ()=> {
+      mb.hideWindow();
+  }
+  var openWindow = ()=> {
+    if(!trayBounds){
+      mb.showWindow();
+    } else {
+      mb.showWindow(trayBounds);
+    }
+  }
+
   ipcMain.on('renderer_init', function(event, arg) {
 
     var sender = event.sender
-
-    var closeWindow = ()=> {
-        mb.hideWindow();
-    }
-    var openWindow = ()=> {
-      if(!trayBounds){
-        mb.showWindow();
-      } else {
-        mb.showWindow(trayBounds);
-      }
-    }
 
     //
     // Toggle window show and hide
@@ -101,6 +101,10 @@ mb.on('ready', function ready () {
   });
   ipcMain.on('quit', (event, arg)=> {
     app.quit();
+  });
+  ipcMain.on('reload', (event, arg)=> {
+    let browserWindow = event.sender;
+    browserWindow.reload()
   });
   notifier.on('click', (event, arg)=> {
     mb.showWindow();

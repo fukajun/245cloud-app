@@ -7,7 +7,12 @@ body {
 .header {
   background-color: #eadba0;
   color: #337ab7;
-  padding: 10px;
+  padding: 5px;
+  padding-bottom: 12px;
   height: 15px;
   text-align: right;
+}
+
+.header i {
+  cursor: pointer;
 }
