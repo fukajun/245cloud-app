@@ -49,14 +49,10 @@ const initMenu = ()=> {
 mb.on('ready', function ready () {
 
   var closeWindow = ()=> {
-      mb.hideWindow();
+    mb.hideWindow();
   }
   var openWindow = ()=> {
-    if(!trayBounds){
-      mb.showWindow();
-    } else {
-      mb.showWindow(trayBounds);
-    }
+    mb.showWindow(mb.tray.getBounds());
   }
 
   ipcMain.on('renderer_init', function(event, arg) {
@@ -115,12 +111,6 @@ mb.on('ready', function ready () {
   })
   mb.on('hide', ()=> {
     switchIconRead();
-  })
-  // FIXME: 今のところtray iconの位置を取る方法がclickイベントしかない
-  //       のでここでtrayBoundsを取得している
-  var trayBounds = null;
-  mb.tray.on('click', (_, bounds)=> {
-    trayBounds = bounds
   })
 
   mb.showWindow();
