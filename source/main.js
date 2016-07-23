@@ -6,8 +6,7 @@ const ACTIVE_MENUBAR_ICON   = __dirname + '/images/active.png'
 const INACTIVE_MENUBAR_ICON = __dirname + '/images/inactive.png'
 const NOTIFY_ICON           = __dirname + '/images/notify_icon.png'
 import menubar from 'menubar';
-import { app, ipcMain, globalShortcut } from 'electron';
-import Menu from 'menu';
+import { app, ipcMain, globalShortcut, Menu } from 'electron';
 import notifier from 'node-notifier';
 import path from 'path'
 
