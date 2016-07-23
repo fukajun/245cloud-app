@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     }
     ipcRenderer.send('quit')
   })
-  quitIcon.addEventListener('click', ()=> {
+  reloadIcon.addEventListener('click', ()=> {
     if(!confirm('リロードしますか？')) {
       return
     }
