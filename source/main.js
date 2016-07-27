@@ -46,6 +46,9 @@ const initMenu = ()=> {
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
+const KEY_POMO_START    = 'ctrl+shift+m'
+const KEY_TOGGLE_WINDOW = 'ctrl+shift+p'
+
 mb.on('ready', function ready () {
 
   var closeWindow = ()=> {
@@ -61,7 +64,11 @@ mb.on('ready', function ready () {
 
     //
     // Toggle window show and hide
-    globalShortcut.register('ctrl+shift+p', ()=> {
+    //
+    // NOTE: Unregister shorcut key event.
+    //       Shortcut key is not left to the old webview after reload.
+    globalShortcut.unregister(KEY_TOGGLE_WINDOW);
+    globalShortcut.register(KEY_TOGGLE_WINDOW, ()=> {
       if(mb.window.isVisible()) {
         closeWindow();
       } else {
@@ -71,7 +78,8 @@ mb.on('ready', function ready () {
 
     //
     // Start pomodoro recently track
-    globalShortcut.register('ctrl+shift+m', ()=> {
+    globalShortcut.unregister(KEY_POMO_START);
+    globalShortcut.register(KEY_POMO_START, ()=> {
       sender.send('pomo_start')
     });
   });
