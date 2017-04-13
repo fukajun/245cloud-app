@@ -1,6 +1,5 @@
 node_modules
-/main.js
-/index.js
 /preload.js
 .DS_Store
-/245cloud*
+/dist/*
+/build/*
