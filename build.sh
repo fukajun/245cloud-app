@@ -7,7 +7,13 @@ APP_NAME=`node -pe 'require("./package.json").name'`
 
 echo "version: ${PKG_VERSION}"
 
+# Clean npm_modules, *.js, *.html ...
+rm -rf ${BUILD_DIR}/*
+
 gulp build
+
+cp ./package.json ${BUILD_DIR}
+pushd ${BUILD_DIR} && npm install --production  && popd
 
 electron-packager ${BUILD_DIR} "${APP_NAME}" \
   --overwrite \
@@ -21,4 +27,4 @@ electron-packager ${BUILD_DIR} "${APP_NAME}" \
 
 cd ${DIST_DIR} && zip -r -y -q \
   "../${APP_NAME}-${PKG_VERSION}-darwin-x64.zip" \
-  "./${APP_NAME}-darwin-x64/${APP_NAME}.app"
+  "./${APP_NAME}-darwin-x64"
