@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-// 
+//
 // Renderer
 
 document.addEventListener("DOMContentLoaded", ()=> {
