@@ -6,10 +6,14 @@
 <link rel="icon" href="./images/favicon.ico" type="image/vnd.microsoft.icon" />
 <link rel="stylesheet" type="text/css" href="stylesheets/flaticon.css">
 <link rel="stylesheet" type="text/css" href="stylesheets/app.css">
-<script src='index.js'></script>
-
+<script src='main.js'></script>
 </head>
-<body>
+
+<body class='245app'>
+  <div class='header'>
+    <i class='js-reload-icon flaticon-refresh'></i>
+    <i class='js-quit-icon flaticon-power-button'></i>
+  </div>
   <webview id='webview' src='http://245cloud.com/' preload='./preload.js'></webview>
 </body>
 </html>
