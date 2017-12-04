@@ -2,7 +2,7 @@
 // MainProcess
 'use strict';
 
-const ACTIVE_MENUBAR_ICON   = __dirname + '/images/active.png'
+const ACTIVE_MENUBAR_ICON   = __dirname + '/images/activeType.png'
 const INACTIVE_MENUBAR_ICON = __dirname + '/images/inactive.png'
 const NOTIFY_ICON           = __dirname + '/images/notify_icon.png'
 import menubar from 'menubar';
